@@ -1,4 +1,4 @@
-"""assoc.py: contains association tables for many to many relationships"""
+"""professorcourse.py: contains association tables for many to many relationships"""
 from db.server import db
 
 # join table between professors and courses
