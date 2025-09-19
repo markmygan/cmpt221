@@ -18,7 +18,7 @@
     ```
 
 ### Lab - Part 1
-In order to connect to a database, you need to _create_ a database. We'll be creating our database in Postgres, so go ahead and download pgAdmin4: https://www.pgadmin.org/download/
+In order to connect to a database, you need to _create_ a database. We'll be creating our database in Postgres, so go ahead and download PostgreSQL and pgAdmin4: https://www.postgresql.org/download/
 
 Open the application and follow the set-up instructions. You'll have to set a password for the user `postgres`. **Remember this password.** Once you're set up, you can create your database by following these instructions:
 
