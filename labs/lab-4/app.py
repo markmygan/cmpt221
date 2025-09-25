@@ -2,12 +2,11 @@
 
 import os
 from dotenv import load_dotenv
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, render_template
 from db.server import init_database, get_session
 from db.schema import Course, Professor, ProfessorCourse
 from db.sql import insert_courses, get_all_courses, update_course, delete_course
 from db.orm import insert_professors, get_all_professors, update_professor, delete_professor
-from sqlalchemy.exc import IntegrityError
 
 # load environment variables from .env
 load_dotenv()
