@@ -44,7 +44,7 @@ def init_database():
         print(f" * Database tables created successfully!")
         return True
 
-        # print the error if the connection attempt fails
+    # print the error if the connection attempt fails
     except Exception as error:
         print(f"\n\n----------- Connection failed!")
         print(f" * Unable to connect to database: {db_name}")
