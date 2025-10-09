@@ -23,8 +23,10 @@ def insert_professors():
     """Insert 3 records into the Professors table using SQLAlchemy ORM."""
     session = get_session()
     try:
-        # TODO: create three professor objects
-        # TODO: use the sqlalchemy orm to insert the new records as a list of professor objects
+        prof1 = Professor(FirstName='Calista', LastName='Phippen', Email='Calista.Phippen1@Marist.edu')
+        prof2 = Professor(FirstName='Bob', LastName='Johnson', Email='bob.johnson@example.com')
+        prof3 = Professor(FirstName='Carol', LastName='Williams', Email='carol.williams@example.com')
+        session.add_all([prof1, prof2, prof3])
         # "save" the changes
         session.commit()
 
@@ -39,8 +41,13 @@ def update_professor():
     """Update one record in the Professors table using SQLAlchemy ORM."""
     session = get_session()
     try:
-        # TODO: get professor to be updated (would ideally be a parameter)
-        # TODO: use the sqlalchemy orm to update 1 record
+        professor = session.query(Professor).filter_by(FirstName='Carol', LastName='Williams').first()
+
+        if professor:
+            professor.Email = 'carol.williams@Marist.edu'
+            session.commit()
+        else:
+            print("Professor not found")
         # "save" the changes
         session.commit()
     
@@ -55,8 +62,13 @@ def delete_professor():
     """Delete one record in the Professors table using SQLAlchemy ORM."""
     session = get_session()
     try:
-        # TODO: get professor to be deleted (would ideally be a parameter)
-        # TODO: use the sqlalchemy orm to delete 1 record
+        professor = session.query(Professor).filter_by(FirstName='Bob', LastName='Johnson').first()
+
+        if professor:
+            session.delete(professor)
+            session.commit()
+        else:
+            print("Professor not found")
         # "save" the changes
         session.commit()
 

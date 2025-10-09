@@ -28,6 +28,10 @@ def insert_courses():
     try:
         # TODO: write a SQL query to insert 3 records 
         query = """
+        INSERT INTO "Courses" (CourseID, CourseName, Semester, Year) VALUES
+            ('C101', 'Software Development II', 'Fall', 2025),
+            ('C102', 'Intro To Programming', 'Spring', 2026),
+            ('C103', 'Web Development Basics', 'Summer', 2026);
         """
         session.execute(text(query))
         session.commit()
@@ -45,6 +49,9 @@ def update_course():
     try:
         # TODO: write a SQL query to update 1 record
         query = """
+        UPDATE "Courses"
+        SET "Semester" = 'Fall'
+        WHERE "CourseID" = 'C103';
         """
         result = session.execute(text(query))
         # "save" the changes
@@ -64,6 +71,8 @@ def delete_course():
     try:
         # TODO: write a SQL query to delete 1 record
         query = """
+        DELETE FROM "Courses"
+        WHERE "CourseID" = 'C102';
         """
         result = session.execute(text(query))
         # "save" the changes
