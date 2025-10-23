@@ -18,3 +18,25 @@ def get_all(table) -> list:
     
     finally:
         session.close()
+
+def insert(record) -> None:
+    """Insert one record into a table
+    
+        args:
+            record (object): record to insert into db
+            
+            returns:
+                none
+                
+    """
+    session = get_session()
+
+    try:
+        session.add(record)
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        print("Error inserting record: ", e)
+
+    finally:
+        session.close()

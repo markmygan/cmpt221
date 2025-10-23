@@ -2,9 +2,9 @@
 
 import os
 from dotenv import load_dotenv
-from flask import Flask, render_template
-from db.query import get_all
-from db.server import init_database
+from flask import Flask, render_template, request, redirect, url_for
+from db.query import get_all, insert
+from db.server import init_database, get_session
 from db.schema import Users
 
 # load environment variables from .env
@@ -42,17 +42,40 @@ def create_app():
         """Home page"""
         return render_template('index.html')
     
-    @app.route('/signup')
+    @app.route('/signup', methods=['GET', 'POST'])
     def signup():
         """Sign up page: enables users to sign up"""
-        #TODO: implement sign up logic here
+
+        if request.method == 'POST':
+    
+                user = Users(FirstName=request.form['FirstName'],
+                             LastName=request.form['LastName'],
+                             Email=request.form['Email'],
+                             PhoneNumber=request.form['PhoneNumber'],
+                             Password=request.form['Password'])
+                insert(user)
+                return redirect(url_for('index'))
+                             
 
         return render_template('signup.html')
-    
-    @app.route('/login')
+                          
+    @app.route('/login', methods=['GET', 'POST'])
     def login():
         """Log in page: enables users to log in"""
         # TODO: implement login logic here
+        if request.method == 'POST':
+            email = request.form['Email']
+            password = request.form['Password']
+            
+            session = get_session()
+            try:
+                user = session.query(Users).filter_by(Email=email, Password=password).first()
+                if user:
+                    return redirect(url_for('success'))
+                else:
+                    return render_template('login.html', error="Invalid email or password.")
+            finally:
+                session.close()
 
         return render_template('login.html')
 
